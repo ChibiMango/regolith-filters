@@ -1,8 +1,14 @@
 import glob
 import json
+import sys
+
+def load_settings():
+    try:
+        return json.loads(sys.argv[1])
+    except (IndexError):
+        return {}
 
 def get_json_from_file(fh):
-
     try:
         # If possible, read the file as JSON
         return json.loads(fh)
@@ -20,6 +26,8 @@ def get_json_from_file(fh):
         return json.loads(contents)
 
 def main():
+    settings = load_settings()
+    folders += tuple(settings.get('extra_folders', ()))
     folders = ('BP', 'RP')
     for folder in folders:
         for file in glob.glob(folder + "/**/*.json", recursive=True):
