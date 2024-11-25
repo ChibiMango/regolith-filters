@@ -27,8 +27,8 @@ def get_json_from_file(fh):
 
 def main():
     settings = load_settings()
-    folders += tuple(settings.get('extra_folders', ()))
     folders = ('BP', 'RP')
+    folders += tuple(settings.get('extra_folders', ()))
     for folder in folders:
         for file in glob.glob(folder + "/**/*.json", recursive=True):
             try:
